@@ -1,0 +1,32 @@
+<div class="container my-4" *ngIf="pelicula; else noEncontrado">
+  <div class="card mb-4 shadow">
+    <img [src]="pelicula.imagen" class="card-img-top" [alt]="pelicula.titulo">
+    <div class="card-body">
+      <h2>{{ pelicula.titulo }}</h2>
+      <p><strong>Año:</strong> {{ pelicula.anio }}</p>
+      <p><strong>Actores:</strong> {{ pelicula.actores }}</p>
+      <p>{{ pelicula.sinopsis }}</p>
+      <a routerLink="/" class="btn btn-secondary mt-2">Volver</a>
+    </div>
+  </div>
+
+  <div class="container mb-5">
+    <h3 class="mb-3">Comentarios</h3>
+    <form (ngSubmit)="agregarComentario()" class="mb-3">
+      <textarea class="form-control mb-2" rows="3" placeholder="Escribe tu opinión..." 
+                [(ngModel)]="nuevoComentario" name="comentario"></textarea>
+      <button class="btn btn-primary" type="submit">Agregar comentario</button>
+    </form>
+
+    <ul class="list-group" id="listaComentarios">
+      <li class="list-group-item" *ngFor="let c of comentarios">{{ c }}</li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #noEncontrado>
+  <div class="container mt-5 text-center">
+    <h3 class="text-danger">Película no encontrada.</h3>
+    <a routerLink="/" class="btn btn-secondary">Volver al inicio</a>
+  </div>
+</ng-template>
